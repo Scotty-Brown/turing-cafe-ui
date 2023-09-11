@@ -1,8 +1,9 @@
+import Reservations from '../Reservations/Reservations';
 import './App.css';
 import React, { useEffect, useState } from 'react';
 
 function App() {
-  const [reservations, setReservations] = useState({})
+  const [reservations, setReservations] = useState([])
 
   function getReservations() {
     return fetch('http://localhost:3001/api/v1/reservations')
@@ -25,6 +26,7 @@ function App() {
       <div className='resy-form'>
       </div>
       <div className='resy-container'>
+        <Reservations reservations={reservations} />
       </div>
     </div>
   );
