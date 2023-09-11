@@ -1,7 +1,24 @@
 import './App.css';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 function App() {
+  const [reservations, setReservations] = useState({})
+
+  function getReservations() {
+    return fetch('http://localhost:3001/api/v1/reservations')
+      .then(res => {
+        if(!res.ok) {
+          throw new Error('Network response not ok, try again.')
+        }
+        return res.json()
+      })
+  }
+
+  useEffect(() => {
+    getReservations()
+    .then(data => setReservations(data))
+  }, [])
+
   return (
     <div className="App">
       <h1 className='app-title'>Turing Cafe Reservations</h1>
